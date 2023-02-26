@@ -1,0 +1,24 @@
+.item{
+    color: dodgerblue;
+}
+
+.item img {
+    width: 40px;
+}
+.text{
+    font-size: 15px;
+    color: indigo;
+    font-family: "Exo", sans-serif;
+}
+.name{
+    color: indigo;
+    font-family: "Exo", sans-serif;
+}
+.like{
+    color: indigo;
+    font-family: "Exo", sans-serif;
+}
+
+.avatar{
+    width: 40px;
+}

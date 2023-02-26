@@ -1,0 +1,25 @@
+.nav {
+    background-color: #040488;
+    border-radius: 5px;
+
+}
+.nav_title{
+    padding-top: 10px;
+    text-align: center;
+}
+
+.item a {
+    margin-bottom: 15px;
+    font-family: "Cambria Math";
+    color: honeydew;
+    margin-top: 15px;
+}
+
+
+
+.item a.activeLink{
+    font-family: Bahnschrift;
+    font-size: 20px;
+    color: #07ea07;
+    margin-top: 15px;
+}

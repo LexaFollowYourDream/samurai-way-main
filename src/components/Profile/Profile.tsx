@@ -1,28 +1,22 @@
 import React from "react";
+import classes from './Profile.module.css'
+import {MyPost} from "./My Posts/MyPosts";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import { ProfilePageType} from "../../redux/state";
 
-const  Profile = () => {
+
+export type ProfilePropsPageType = {
+    posts:ProfilePageType
+    addPostCallback:(postText:string)=>void
+}
+
+
+const Profile = (props:ProfilePropsPageType) => {
+
     return (
-        <div className={"content"}>
-            <div>
-                <img src="https://storage.yandexcloud.net/moskvichmag/uploads/2022/06/lori-0032284699-a7.jpg"/>
-            </div>
-            <div>
-                ava + description
-            </div>
-            <div>
-                my post
-                <div>
-                    New post
-                </div>
-            </div>
-            <div>
-                <div>
-                    post 1
-                </div>
-                <div>
-                    post 2
-                </div>
-            </div>
+        <div>
+            <ProfileInfo/>
+            <MyPost  posts = {props.posts} addPostCallback ={props.addPostCallback} />
         </div>
     );
 }
