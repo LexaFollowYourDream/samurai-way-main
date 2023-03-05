@@ -5,14 +5,14 @@ import {ProfilePageType} from "../../../../redux/state";
 
 
 export type ProfilePropsPageType = {
-    post: ProfilePageType
+    posts: ProfilePageType
 }
 
 export const Post = (props: ProfilePropsPageType) => {
     return (
         <ul>
             {
-                props.post.posts.map(el => {
+                props.posts.posts.map(el => {
                     return <li key={el.id}>
                         <span> Text: {el.message}</span>
                         <div> Like: {el.like}</div>

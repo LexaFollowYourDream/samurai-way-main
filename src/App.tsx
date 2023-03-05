@@ -8,14 +8,15 @@ import {BrowserRouter, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import { RootStateType,} from "./redux/state";
+import {changeNewTextCallback, RootStateType} from "./redux/state";
 import Friends from "./components/Friends/Friends";
 
 
 
 export type RootStatePropsType = {
-    appState:RootStateType
-    addPost:(postText:string) =>void
+    appState:RootStateType,
+    addPost:(postText:string) =>void,
+    changeNewTextCallback:(newText:string)=>void
 }
 
 const App = (props:RootStatePropsType) => {
@@ -32,6 +33,8 @@ const App = (props:RootStatePropsType) => {
                     <Route path="/profile" render={() => <Profile
                         posts={props.appState.profilePage}
                         addPostCallback = {props.addPost}
+                        message={props.appState.profilePage.messageForNewPost}
+                        changeNewTextCallback={changeNewTextCallback}
                     />}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>

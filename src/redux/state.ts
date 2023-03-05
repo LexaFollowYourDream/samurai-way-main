@@ -21,6 +21,7 @@ export type PostsType = {
 
 export type ProfilePageType = {
     posts: PostsType[]
+    messageForNewPost:string
 }
 export type DialogsPageType = {
     dialogs: DialogsType[]
@@ -35,6 +36,7 @@ export type RootStateType = {
 
 let state: RootStateType = {
     profilePage: {
+        messageForNewPost:"",
         posts: [
             {id: 0, message: 'Hello, she didn’t do anything and rested all day, how are you?', like: 12,},
             {id: 1, message: 'Hello', like: 1},
@@ -64,13 +66,17 @@ let state: RootStateType = {
 
 export const addPost = (postText: string) => {
     const newPost: PostsType = {
-        id: new Date().getDate(),
+        id: new Date().getTime(),
         message: postText,
         like: 111110
     }
     state.profilePage.posts.unshift(newPost);
     renderTree(state)
+}
 
+export const changeNewTextCallback = (newText:string) => {
+    state.profilePage.messageForNewPost = newText
+    renderTree(state)
 }
 
 export default state
