@@ -1,5 +1,4 @@
 import React from "react";
-import classes from './Profile.module.css'
 import {MyPost} from "./My Posts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import {changeNewTextCallback,ProfilePageType} from "../../redux/state";
