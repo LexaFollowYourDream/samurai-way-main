@@ -22,3 +22,10 @@
 .message {
 
 }
+.Button_textarea{
+    display: flex;
+    padding: 10px;
+}
+.textarea{
+    margin-right: 20px;
+}
