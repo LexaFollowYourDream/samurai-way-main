@@ -1,3 +1,5 @@
+import {ActionProfileType, profileReducer} from "./profile-reducer";
+
 export type MessageType = {
     id: number,
     message: string
@@ -38,7 +40,7 @@ export type StoreType = {
     _onChange: () => void,
     subscribe: (callback: () => void) => void,
     getState: () => RootStateType,
-    dispatch: (action: ActionType) => void
+    dispatch: (action: ActionType | ActionProfileType) => void
 }
 
 
@@ -73,9 +75,7 @@ export const updateNewMessagesBodyAC = (newMessageBody: string) => {
 export const sendMessageAC = () => {
     return {
         type: "SEND-MESSAGES",
-        //body: body,
     } as const
-
 }
 
 
@@ -111,7 +111,6 @@ const store: StoreType = {
         }
     },
 
-
     changeNewTextCallback(newText: string) {
         this._state.profilePage.messageForNewPost = newText
         this._onChange()
@@ -125,6 +124,7 @@ const store: StoreType = {
         this._state.profilePage.posts.unshift(newPost);
         this._onChange()
     },
+
     _onChange() {
         console.log("State changed")
     },
@@ -134,7 +134,11 @@ const store: StoreType = {
     getState() {
         return this._state
     },
-    dispatch(action) {
+
+    dispatch (action) {
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._onChange();
+
         if (action.type === "ADD-POST") {
             const newPost: PostsType = {
                 id: new Date().getTime(),
@@ -143,21 +147,26 @@ const store: StoreType = {
             }
             this._state.profilePage.posts.unshift(newPost);
             this._onChange();
+
         } else if (action.type === "CHANGE-NEW-TEXT") {
             this._state.profilePage.messageForNewPost = action.newText;
             this._onChange();
-        } else if (action.type === "UPDATE-NEW-MESSAGES-BODY") {
+
+        }
+
+
+        else if (action.type === "UPDATE-NEW-MESSAGES-BODY") {
             this._state.dialogsPage.newMessageBody = action.newMessageBody;
             this._onChange();
-        }else if (action.type === "SEND-MESSAGES"){
+        } else if (action.type === "SEND-MESSAGES") {
             let body = this._state.dialogsPage.newMessageBody;
             this._state.dialogsPage.newMessageBody = "";
             this._state.dialogsPage.messages.push({id: 7, message: body})
             this._onChange();
         }
+
+
     }
-
-
 }
 
 
