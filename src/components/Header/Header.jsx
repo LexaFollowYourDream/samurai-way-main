@@ -6,6 +6,7 @@ const Header = () => {
         <header className={classes.header}>
             <img className={classes.img}
                  src="https://play-lh.googleusercontent.com/DTzWtkxfnKwFO3ruybY1SKjJQnLYeuK3KmQmwV5OQ3dULr5iXxeEtzBLceultrKTIUTr"/>
+            <p className={classes.message}> Сообщество ценителей Грузии</p>
         </header>
     );
 }

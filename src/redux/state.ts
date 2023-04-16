@@ -1,4 +1,5 @@
-import {ActionProfileType, profileReducer} from "./profile-reducer";
+import { profileReducer} from "./profile-reducer";
+import {dialogsReducer} from "./dialogs-reducer";
 
 export type MessageType = {
     id: number,
@@ -15,7 +16,6 @@ export type PostsType = {
     id: number,
     message: string,
     like: number
-
 }
 
 export type ProfilePageType = {
@@ -40,7 +40,7 @@ export type StoreType = {
     _onChange: () => void,
     subscribe: (callback: () => void) => void,
     getState: () => RootStateType,
-    dispatch: (action: ActionType | ActionProfileType) => void
+    dispatch: (action: ActionType) => void
 }
 
 
@@ -116,7 +116,7 @@ const store: StoreType = {
         this._onChange()
     },
     addPost(postText: string) {
-        const newPost: PostsType = {
+        let newPost: PostsType = {
             id: new Date().getTime(),
             message: postText,
             like: 111110
@@ -135,10 +135,12 @@ const store: StoreType = {
         return this._state
     },
 
-    dispatch (action) {
+    dispatch(action) {
         this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage=dialogsReducer(this._state.dialogsPage,action)
         this._onChange();
 
+/*
         if (action.type === "ADD-POST") {
             const newPost: PostsType = {
                 id: new Date().getTime(),
@@ -154,7 +156,6 @@ const store: StoreType = {
 
         }
 
-
         else if (action.type === "UPDATE-NEW-MESSAGES-BODY") {
             this._state.dialogsPage.newMessageBody = action.newMessageBody;
             this._onChange();
@@ -163,7 +164,7 @@ const store: StoreType = {
             this._state.dialogsPage.newMessageBody = "";
             this._state.dialogsPage.messages.push({id: 7, message: body})
             this._onChange();
-        }
+        }*/
 
 
     }
