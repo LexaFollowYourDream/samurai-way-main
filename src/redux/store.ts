@@ -1,5 +1,5 @@
-import { profileReducer} from "./profile-reducer";
-import {dialogsReducer} from "./dialogs-reducer";
+import {addPostAC, changeNewTextAC, profileReducer} from "./profile-reducer";
+import {dialogsReducer, sendMessageAC, updateNewMessagesBodyAC} from "./dialogs-reducer";
 
 export type MessageType = {
     id: number,
@@ -48,35 +48,6 @@ export type ActionType = ReturnType<typeof changeNewTextAC>
     | ReturnType<typeof addPostAC>
     | ReturnType<typeof updateNewMessagesBodyAC>
     | ReturnType<typeof sendMessageAC>
-
-
-export const addPostAC = (postText: string) => {
-    return {
-        type: "ADD-POST",
-        postText: postText
-    } as const
-}
-
-export const changeNewTextAC = (newText: string,) => {
-    return {
-        type: "CHANGE-NEW-TEXT",
-        newText: newText
-    } as const
-}
-
-export const updateNewMessagesBodyAC = (newMessageBody: string) => {
-    return {
-        type: "UPDATE-NEW-MESSAGES-BODY",
-        newMessageBody: newMessageBody
-    } as const
-
-}
-
-export const sendMessageAC = () => {
-    return {
-        type: "SEND-MESSAGES",
-    } as const
-}
 
 
 const store: StoreType = {
@@ -137,36 +108,8 @@ const store: StoreType = {
 
     dispatch(action) {
         this._state.profilePage = profileReducer(this._state.profilePage, action)
-        this._state.dialogsPage=dialogsReducer(this._state.dialogsPage,action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
         this._onChange();
-
-/*
-        if (action.type === "ADD-POST") {
-            const newPost: PostsType = {
-                id: new Date().getTime(),
-                message: action.postText,
-                like: 111110
-            }
-            this._state.profilePage.posts.unshift(newPost);
-            this._onChange();
-
-        } else if (action.type === "CHANGE-NEW-TEXT") {
-            this._state.profilePage.messageForNewPost = action.newText;
-            this._onChange();
-
-        }
-
-        else if (action.type === "UPDATE-NEW-MESSAGES-BODY") {
-            this._state.dialogsPage.newMessageBody = action.newMessageBody;
-            this._onChange();
-        } else if (action.type === "SEND-MESSAGES") {
-            let body = this._state.dialogsPage.newMessageBody;
-            this._state.dialogsPage.newMessageBody = "";
-            this._state.dialogsPage.messages.push({id: 7, message: body})
-            this._onChange();
-        }*/
-
-
     }
 }
 

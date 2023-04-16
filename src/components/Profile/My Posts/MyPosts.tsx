@@ -1,28 +1,24 @@
 import React, {ChangeEvent} from "react";
 import classes from './MyPosts.module.css'
 import {Post} from "./Post/Post";
-import {ActionType, addPostAC, changeNewTextAC, ProfilePageType} from "../../../redux/state";
+import {ActionType, ProfilePageType} from "../../../redux/store";
+import {addPostAC, changeNewTextAC} from "../../../redux/profile-reducer";
 
 
 export type ProfilePropsPageType = {
     posts: ProfilePageType,
-    addPostCallback:(postText:string)=>void
-    message:string
-    changeNewTextCallback:(newText:string)=>void
-    dispatch:(action: ActionType)=>void
+    message: string
+    dispatch: (action: ActionType) => void
 }
 
 
 export const MyPost = (props: ProfilePropsPageType) => {
 
     let addPost = () => {
-        // props.addPostCallback(props.message)
-        //props.dispatch({type:"ADD-POST" , postText:props.message})
         props.dispatch(addPostAC(props.message))
     }
 
-    const newTextChangeHandler = (e:ChangeEvent<HTMLTextAreaElement>) => {
-     // props.changeNewTextCallback(e.currentTarget.value)
+    const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.dispatch(changeNewTextAC(e.currentTarget.value))
     }
 

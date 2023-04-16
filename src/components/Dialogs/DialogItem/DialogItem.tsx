@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "../Dialogs.module.css";
 import {NavLink} from "react-router-dom";
-import {DialogsPageType} from "../../../redux/state";
+import {DialogsPageType} from "../../../redux/store";
 
 export type DialogsPagePropsType = {
     dialogs: DialogsPageType

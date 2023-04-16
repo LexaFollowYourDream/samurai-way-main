@@ -1,7 +1,7 @@
 import React from "react";
 import classes from './Post.module.css'
 import avatar1 from './avatar1.jpg'
-import {ProfilePageType} from "../../../../redux/state";
+import {ProfilePageType} from "../../../../redux/store";
 
 
 export type ProfilePropsPageType = {
