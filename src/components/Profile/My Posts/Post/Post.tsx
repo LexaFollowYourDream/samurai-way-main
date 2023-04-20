@@ -1,18 +1,19 @@
 import React from "react";
 import classes from './Post.module.css'
 import avatar1 from './avatar1.jpg'
-import {ProfilePageType} from "../../../../redux/store";
+import {PostsType} from "../../../../type/type";
+
 
 
 export type ProfilePropsPageType = {
-    posts: ProfilePageType
+    posts: PostsType[]
 }
 
 export const Post = (props: ProfilePropsPageType) => {
     return (
         <ul>
             {
-                props.posts.posts.map(el => {
+                props.posts.map(el => {
                     return <li key={el.id}>
                         <span> Text: {el.message}</span>
                         <div> Like: {el.like}</div>

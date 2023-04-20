@@ -1,5 +1,7 @@
-import {ActionType, PostsType, ProfilePageType} from "./store";
+import {ActionType, PostsType} from "../type/type";
 
+
+type initStateType = typeof initialState
 
 let initialState = {
     messageForNewPost: "",
@@ -10,7 +12,7 @@ let initialState = {
     ]
 }
 
-export const profileReducer = (state: ProfilePageType = initialState, action: ActionType): ProfilePageType => {
+export const profileReducer = (state: initStateType = initialState, action: ActionType): initStateType => {
 
     switch (action.type) {
         case "ADD-POST":

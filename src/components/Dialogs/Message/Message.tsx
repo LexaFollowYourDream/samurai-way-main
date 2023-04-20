@@ -1,12 +1,10 @@
 import React from "react";
-import classes from "../Dialogs.module.css";
-import {DialogsPagePropsType} from "../DialogItem/DialogItem";
-import {MessageType} from "../../../redux/store";
+import {MessageType} from "../../../type/type";
+
 
 type MessageTypePropsType = {
     message: MessageType[]
 }
-
 
 const Message = (props: MessageTypePropsType) => {
     return (

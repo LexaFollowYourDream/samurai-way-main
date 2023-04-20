@@ -1,4 +1,7 @@
-import {ActionType, DialogsPageType} from "./store";
+import {ActionType} from "../type/type";
+
+
+type initStateType = typeof initialState
 
 let initialState = {
     dialogs: [
@@ -21,7 +24,7 @@ let initialState = {
 }
 
 
-export const dialogsReducer = (state: DialogsPageType = initialState, action: ActionType): DialogsPageType => {
+export const dialogsReducer = (state: initStateType = initialState, action: ActionType): initStateType => {
     switch (action.type) {
         case "UPDATE-NEW-MESSAGES-BODY":
             return {

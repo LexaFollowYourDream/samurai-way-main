@@ -1,20 +1,21 @@
 import React from "react";
 import classes from "../Dialogs.module.css";
 import {NavLink} from "react-router-dom";
-import {DialogsPageType} from "../../../redux/store";
+import {DialogsType} from "../../../type/type";
+
 
 export type DialogsPagePropsType = {
-    dialogs: DialogsPageType
+    dialogs: DialogsType[]
 }
 
 const DialogsItem = (props: DialogsPagePropsType) => {
-    let path = '/dialogs/' + props.dialogs.dialogs.map(el => el.name);
+    let path = '/dialogs/' + props.dialogs.map(el => el.name);
 
     return (
         <div className={classes.dialog + ' ' + classes.active}>
             <NavLink to={path}>
                 {
-                    props.dialogs.dialogs.map(el => {
+                    props.dialogs.map(el => {
 
                         return <li key={el.id}>
                             <span>{el.name}</span>
