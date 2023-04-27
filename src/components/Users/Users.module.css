@@ -1,0 +1,28 @@
+.photo{
+    width: 150px;
+    height: 150px;
+    border-radius: 5%;
+}
+
+.button{
+    background-color: white;
+    padding: 5px;
+    border-radius: 5%;
+}
+.button_getUsers{
+    background-color: white;
+    padding: 5px;
+    border-radius: 5%;
+    margin: 10px;
+}
+.number{
+    padding: 10px;
+    display: flex;
+    width: 300px;
+    justify-content: space-around;
+}
+.selectedPage{
+    font-family: Bahnschrift;
+    font-size: 20px;
+    color: #07ea07;
+}
