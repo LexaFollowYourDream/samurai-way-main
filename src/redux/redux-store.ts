@@ -1,23 +1,16 @@
 import {combineReducers,legacy_createStore, Store} from "redux";
 import {profileReducer} from "./profile-reducer";
 import {dialogsReducer} from "./dialogs-reducer";
+import {usersReducer} from "./users-reducer";
 
-
-// let reducers = combineReducers({
-//     dialogsReducer,
-//     profileReducer
-// })
-//
-// export let store = createStore(reducers);
-//
-// export default store
 
 
 //объединяя reducer-ы с помощью combineReducers,
 //мы задаём структуру нашего единственного объекта-состояния
 const rootReducer = combineReducers({
     profilePage: profileReducer,
-    dialogsPage: dialogsReducer
+    dialogsPage: dialogsReducer,
+    usersPage:usersReducer,
 })
 // непосредственно создаём store (и делаем его типизацию)
 export const store:StoreType = legacy_createStore(rootReducer)

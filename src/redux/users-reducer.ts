@@ -1,40 +1,13 @@
-import { UserPageType, UserType} from "../type/type";
+import {UserPageType, UserType} from "../type/type";
 import {ActionType} from "../type/acttionType";
 
-
-let initialState :UserPageType = {
-    users: [
-        {
-            id: 1,
-            followed: true,
-            fullName: "Sasha",
-            status: "Сегодня понедельник",
-            location: {city: "Minsk", country: "Belarus"}
-        },
-        {
-            id: 2,
-            followed: true,
-            fullName: "Konstantin",
-            status: "Сегодня вторник",
-            location: {city: "Mogilev", country: "Belarus"}
-        },
-        {
-            id: 3,
-            followed: false,
-            fullName: "Vera",
-            status: "Сегодня среда",
-            location: {city: "Dzyarzhynsk", country: "Belarus"}
-        },
-        {
-            id: 4,
-            followed: false,
-            fullName: "Yekaterina,",
-            status: "Сегодня четверг",
-            location: {city: "Zaslawye", country: "Belarus"}
-        },
-    ]
+let initialState: UserPageType = {
+    users: [],
+    pageSize: 2400,
+    totalUsersCount: 0,
+    currentPage: 1,
+    isFetching: false,
 }
-
 
 export const usersReducer = (state: UserPageType = initialState, action: ActionType): UserPageType => {
 
@@ -62,11 +35,19 @@ export const usersReducer = (state: UserPageType = initialState, action: ActionT
             }
 
         case "SET-USERS":
-            return {...state,users:action.users}
+            return {...state, users: action.users}
+
+        case "SET-CURRENT-PAGE":
+            return {...state, currentPage: action.currentPage}
+
+        case "SET-TOTAL-USERS-COUNT":
+            return {...state, totalUsersCount: action.count}
+        case "TOGGLE-IS FETCHING":
+            return {...state,isFetching:action.isFetching}
+
         default:
             return state
     }
-
 }
 
 
@@ -83,9 +64,28 @@ export const unFollowAC = (userId: number) => {
         userId: userId
     } as const
 }
-export const setUsersAC = ( users:Array<UserType>) => {
+export const setUsersAC = (users: Array<UserType>) => {
     return {
         type: "SET-USERS",
         users: users
+    } as const
+}
+
+export const setCurrentPageAC = (currentPage: number) => {
+    return {
+        type: "SET-CURRENT-PAGE",
+        currentPage: currentPage
+    } as const
+}
+export const setTotalUserCountAC = (totalUsersCount: number) => {
+    return {
+        type: "SET-TOTAL-USERS-COUNT",
+        count: totalUsersCount
+    } as const
+}
+export const toggleIsFetchingAC = (isFetching: boolean) => {
+    return {
+        type: "TOGGLE-IS FETCHING",
+        isFetching: isFetching
     } as const
 }

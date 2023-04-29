@@ -1,50 +1,66 @@
 import React from "react";
-import {UserType} from "../../type/type";
+import classes from "./Users.module.css";
+import userPhoto from "../../assets/images/user.png.png";
+import {UserPageType} from "../../type/type";
 
-
-
-export type UsersPropsType = {
+type UsersFunType = {
+    usersPage: UserPageType,
+    onPageChanged: (pageNumber: number) => void,
     follow: (userId: number) => void,
     unfollow: (userId: number) => void,
-    setUsers: (users: Array<UserType>) => void,
-    users: Array<UserType>
+    toggleIsFetching: (isFetching: boolean) => void,
 }
 
+export const Users = (props: UsersFunType) => {
 
-export const Users = (props: UsersPropsType) => {
+    let pagesCount = Math.ceil(props.usersPage.totalUsersCount / props.usersPage.pageSize)
+    let pages = []
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(i)
+    }
+
     return (
         <div>
-            {
-                props.users.map((el) => <div key={el.id}>
+            <div>
+                <div className={classes.number}>
+                    {pages.map(p => {
+                        return <span className={props.usersPage.currentPage === p ? classes.selectedPage : ""}
+                                     onClick={(event) => {props.onPageChanged(p)}}>{p}</span>
+                    })}
+                </div>
+                {
+                    props.usersPage.users.map(el => <div key={el.id}>
                     <span>
                         <div>
-                            <img/>
+                            <img src={el.photos.small != null ? el.photos.small : userPhoto} className={classes.photo}/>
                         </div>
                         <div>
                             {el.followed
-                                ? <button onClick={() => {
+                                ? <button className={classes.button} onClick={() => {
                                     props.unfollow(el.id)
                                 }}> Follow</button>
-                                : <button onClick={() => {
+                                : <button className={classes.button} onClick={() => {
                                     props.follow(el.id)
                                 }}>UnFollow</button>}
 
                         </div>
                     </span>
 
-                    <span>
                         <span>
-                            <div>{el.fullName}</div>
+                        <span>
+                            <div>{el.name}</div>
                             <div>{el.status}</div>
                         </span>
                         <span>
-                            <div>{el.location.city}</div>
-                            <div>{el.location.country}</div>
+                            <div>{"el.location.city"}</div>
+                            <div>{"el.location.country"}</div>
                         </span>
                     </span>
 
-                </div>)
-            }
+                    </div>
+                    )
+                }
+            </div>
         </div>
     )
 }

@@ -1,9 +1,8 @@
-import {ActionType} from "../type/type";
+import {ActionType} from "../type/acttionType";
+import {DialogsPageType} from "../type/type";
 
 
-type initStateType = typeof initialState
-
-let initialState = {
+let initialState:DialogsPageType = {
     dialogs: [
         {id: 1, name: 'Dimon'},
         {id: 2, name: 'Lexa'},
@@ -24,7 +23,7 @@ let initialState = {
 }
 
 
-export const dialogsReducer = (state: initStateType = initialState, action: ActionType): initStateType => {
+export const dialogsReducer = (state: DialogsPageType = initialState, action: ActionType): DialogsPageType => {
     switch (action.type) {
         case "UPDATE-NEW-MESSAGES-BODY":
             return {

@@ -1,16 +1,15 @@
 import React, {ChangeEvent} from "react";
 import classes from './MyPosts.module.css'
 import {Post} from "./Post/Post";
-import { } from "../../../redux/store";
-import {ActionType, PostsType} from "../../../type/type";
+import {PostsType, ProfilePageType} from "../../../type/type";
 
 
 
 export type ProfilePropsPageType = {
     posts: PostsType[],
-    message: string
-    dispatch: (action: ActionType) => void
-    addPost: () => void
+    message: string,
+    //dispatch: (action: ActionType) => void
+    addPost: (newPost:string) => void,
     newTextChangeHandler: (newText: string) => void
 }
 
@@ -20,7 +19,7 @@ export const MyPost = (props: ProfilePropsPageType) => {
 
     let addPost = () => {
         //props.dispatch(addPostAC(props.message))
-        props.addPost()
+        props.addPost(props.message)
     }
 
     const newTextChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
