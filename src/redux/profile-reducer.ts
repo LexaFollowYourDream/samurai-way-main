@@ -1,4 +1,4 @@
-import {PostsType, ProfilePageType} from "../type/type";
+import {PostsType, ProfilePageType, ProfileType} from "../type/type";
 import {ActionType} from "../type/acttionType";
 
 
@@ -8,7 +8,8 @@ let initialState: ProfilePageType = {
         {id: 0, message: 'Hello, she didn’t do anything and rested all day, how are you?', like: 12,},
         {id: 1, message: 'Hello', like: 1},
         {id: 2, message: 'Hello how a you', like: 8,}
-    ]
+    ],
+    profile: null
 }
 
 export const profileReducer = (state: ProfilePageType = initialState, action: ActionType): ProfilePageType => {
@@ -31,6 +32,8 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
                 ...state,
                 messageForNewPost: action.newText
             }
+        case "SET-USER-PROFILE":
+            return {...state, profile: action.profile}
 
         default:
             return state
@@ -48,6 +51,13 @@ export const changeNewTextAC = (newText: string,) => {
     return {
         type: "CHANGE-NEW-TEXT",
         newText: newText
+    } as const
+}
+
+export const setUsersProfileAC = (profile: ProfileType) => {
+    return {
+        type: "SET-USER-PROFILE",
+        profile: profile
     } as const
 }
 

@@ -5,8 +5,10 @@ import {AppRootStateType} from "../../../redux/redux-store";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 
-const mapStateToProps = (state: AppRootStateType) => {
 
+
+
+const mapStateToProps = (state: AppRootStateType) => {
     return {
         message: state.profilePage.messageForNewPost,
         posts: state.profilePage.posts

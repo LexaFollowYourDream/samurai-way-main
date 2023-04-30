@@ -2,6 +2,7 @@ import React from "react";
 import classes from "./Users.module.css";
 import userPhoto from "../../assets/images/user.png.png";
 import {UserPageType} from "../../type/type";
+import {NavLink} from "react-router-dom";
 
 type UsersFunType = {
     usersPage: UserPageType,
@@ -25,14 +26,20 @@ export const Users = (props: UsersFunType) => {
                 <div className={classes.number}>
                     {pages.map(p => {
                         return <span className={props.usersPage.currentPage === p ? classes.selectedPage : ""}
-                                     onClick={(event) => {props.onPageChanged(p)}}>{p}</span>
+                                     onClick={(event) => {
+                                         props.onPageChanged(p)
+                                     }}>{p}</span>
                     })}
                 </div>
                 {
                     props.usersPage.users.map(el => <div key={el.id}>
                     <span>
                         <div>
-                            <img src={el.photos.small != null ? el.photos.small : userPhoto} className={classes.photo}/>
+                            <NavLink to={"/profile/" + el.id}>
+                              <img src={el.photos.small != null ? el.photos.small : userPhoto}
+                                   className={classes.photo}/>
+                        </NavLink>
+
                         </div>
                         <div>
                             {el.followed
@@ -46,7 +53,7 @@ export const Users = (props: UsersFunType) => {
                         </div>
                     </span>
 
-                        <span>
+                            <span>
                         <span>
                             <div>{el.name}</div>
                             <div>{el.status}</div>
@@ -57,7 +64,7 @@ export const Users = (props: UsersFunType) => {
                         </span>
                     </span>
 
-                    </div>
+                        </div>
                     )
                 }
             </div>

@@ -1,4 +1,4 @@
-import {addPostAC, changeNewTextAC} from "../redux/profile-reducer";
+import {addPostAC, changeNewTextAC, setUsersProfileAC} from "../redux/profile-reducer";
 import {sendMessageAC, updateNewMessagesBodyAC} from "../redux/dialogs-reducer";
 import {
     followAC,
@@ -18,3 +18,4 @@ export type ActionType = ReturnType<typeof changeNewTextAC>
     | ReturnType<typeof setCurrentPageAC>
     | ReturnType<typeof setTotalUserCountAC>
     | ReturnType<typeof toggleIsFetchingAC>
+    | ReturnType<typeof setUsersProfileAC>
