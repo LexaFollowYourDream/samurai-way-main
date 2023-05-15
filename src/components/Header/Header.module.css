@@ -10,9 +10,20 @@
     background-color: #0bd98b;
     grid-area: h;
     border-radius: 5px;
-    position: relative
+    position: relative;
 }
-.message{
+
+.block {
+    display: flex;
+    justify-content: space-between;
+}
+
+.message {
     margin-left: 450px;
+}
+
+.login {
+    color: white;
+    padding: 15px;
 }
 

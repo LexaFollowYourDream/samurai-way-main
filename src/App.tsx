@@ -1,16 +1,18 @@
 import React from 'react';
 import './App.css';
-import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import {Route} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import Friends from "./components/Friends/Friends";
-import {AppRootStateType, store} from "./redux/redux-store";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import { UsersContainer} from "./components/Users/UsersContainer";
 import { ProfileContainer} from "./components/Profile/ProfileInfo/ProfileContainer";
+import {HeaderContainer} from "./components/Header/HeaderContainer";
+import {connect} from "react-redux";
+
+
 
 
 // type PropsType = {
@@ -20,10 +22,9 @@ import { ProfileContainer} from "./components/Profile/ProfileInfo/ProfileContain
 const App = () => {
 
     //const state: AppRootStateType = store.getState()
-
     return (
         <div className='app-wrapper'>
-            <Header/>
+            <HeaderContainer/>
             <Navbar/>
             <div className='app-wrapper-content'>
                 <Route path="/dialogs" render={() => <DialogsContainer

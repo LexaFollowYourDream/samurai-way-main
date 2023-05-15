@@ -3,13 +3,16 @@ import classes from "./Users.module.css";
 import userPhoto from "../../assets/images/user.png.png";
 import {UserPageType} from "../../type/type";
 import {NavLink} from "react-router-dom";
+import {usersAPI} from "../../api/api";
+
 
 type UsersFunType = {
     usersPage: UserPageType,
     onPageChanged: (pageNumber: number) => void,
-    follow: (userId: number) => void,
+    follow: (userId: number) => any,
     unfollow: (userId: number) => void,
     toggleIsFetching: (isFetching: boolean) => void,
+    followingInProgress: (isFetching: boolean, Userid: number) => void
 }
 
 export const Users = (props: UsersFunType) => {
@@ -25,7 +28,8 @@ export const Users = (props: UsersFunType) => {
             <div>
                 <div className={classes.number}>
                     {pages.map(p => {
-                        return <span className={props.usersPage.currentPage === p ? classes.selectedPage : ""}
+                        return <span key={p}
+                                     className={props.usersPage.currentPage === p ? classes.selectedPage : classes.page}
                                      onClick={(event) => {
                                          props.onPageChanged(p)
                                      }}>{p}</span>
@@ -43,12 +47,21 @@ export const Users = (props: UsersFunType) => {
                         </div>
                         <div>
                             {el.followed
-                                ? <button className={classes.button} onClick={() => {
-                                    props.unfollow(el.id)
-                                }}> Follow</button>
-                                : <button className={classes.button} onClick={() => {
-                                    props.follow(el.id)
-                                }}>UnFollow</button>}
+                                ? <button
+                                    disabled={props.usersPage.followingInProgress.some(id => id === el.id)}
+                                    className={classes.button}
+                                    onClick={() => {
+                                        props.unfollow(el.id)
+                                    }}>UnFollow</button>
+
+
+                                : <button
+                                    disabled={props.usersPage.followingInProgress.some(id => id === el.id)}
+
+                                    className={classes.button}
+                                    onClick={() => {
+                                        props.follow(el.id)
+                                    }}>Follow</button>}
 
                         </div>
                     </span>

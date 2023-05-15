@@ -7,15 +7,20 @@ import {DialogsPageType} from "../../type/type";
 
 export type DialogsPagePropsType = {
     updateNewMessagesBody: (newMessageBody: string) => void
-    onSendMessagesClick: () => void
+    //onSendMessagesClick: () => void
+    sendMessage:()=>void
     dialogsPage: DialogsPageType
 }
 
 const Dialogs = (props: DialogsPagePropsType) => {
 
 
+     // const onSendMessagesClick = () => {
+     //     props.onSendMessagesClick()
+     // }
+
     const onSendMessagesClick = () => {
-        props.onSendMessagesClick()
+        props.sendMessage()
     }
 
     const onNewMessagesChange = (event: ChangeEvent<HTMLTextAreaElement>) => {

@@ -24,8 +24,16 @@
 .selectedPage{
     font-family: Bahnschrift;
     font-size: 20px;
-    color: #07ea07;
+    color: #08d52f;
+    cursor: pointer;
 }
+.page {
+    font-family: Bahnschrift;
+    font-size: 20px;
+    color: #de0606;
+    cursor: pointer;
+}
+
 .Loading{
     width: 20px;
 

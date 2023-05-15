@@ -22,10 +22,16 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
             </div>
             <div>
                 <img src={props.profile?.photos.large}/>
-                ava + description
+                <div>{props.profile.contacts?.facebook}</div>
+                <div>{props.profile.contacts?.github}</div>
+                <div>{props.profile.contacts?.vk}</div>
+                <div>{props.profile.contacts?.twitter}</div>
+                <div>{props.profile.contacts?.mainLink}</div>
+                <div>{props.profile.contacts?.website}</div>
+                <div>{props.profile.contacts?.youtube}</div>
+                <div>{props.profile.fullName}</div>
+                <div>{props.profile.lookingForAJobDescription}</div>
             </div>
-
-
         </div>
     )
 }

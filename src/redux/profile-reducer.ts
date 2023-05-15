@@ -1,5 +1,7 @@
 import {PostsType, ProfilePageType, ProfileType} from "../type/type";
 import {ActionType} from "../type/acttionType";
+import {usersAPI} from "../api/api";
+import {Dispatch} from "redux";
 
 
 let initialState: ProfilePageType = {
@@ -61,3 +63,11 @@ export const setUsersProfileAC = (profile: ProfileType) => {
     } as const
 }
 
+
+export const getUserProfile = (userId: string) => (dispatch: Dispatch) => {
+    usersAPI.getProfile(userId)
+        .then(data => {
+            dispatch(setUsersProfileAC(data))
+
+        });
+}

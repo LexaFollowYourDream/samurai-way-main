@@ -1,54 +1,38 @@
 import React from "react";
 import {connect} from "react-redux";
 import {
-    followAC,
-    setCurrentPageAC,
-    setUsersAC,
-    setTotalUserCountAC, toggleIsFetchingAC,
-    unFollowAC,
+    toggleIsFetchingAC,
+    followingInProgressAC, getUsersThunkCreator, onPageChangedThunkCreator, follow, unFollow,
 } from "../../redux/users-reducer";
 import {AppRootStateType} from "../../redux/redux-store";
-import {UserPageType, UserType} from "../../type/type";
-import axios from "axios";
+import {UserPageType} from "../../type/type";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
 
 
+
 export type UsersPropsType = {
-    follow: (userId: number) => void,
+    follow: (userId: number) => any,
     unfollow: (userId: number) => void,
-    setUsers: (users: Array<UserType>) => void,
-    setCurrentPage: (pageNumber: number) => void,
-    setTotalUserCount: (totalCount: number) => void,
     toggleIsFetching: (isFetching: boolean) => void,
+    followingInProgress: (isFetching: boolean, Userid: number) => void
+    getUsers: (currentPage: number, pageSize: number) => any
+    onPageChangedThunkCreator: (pageNumber: number, pageSize: number) => any
     usersPage: UserPageType
 }
 
 export class UsersAPIComponent extends React.Component<UsersPropsType> {
 
     componentDidMount() {
-        this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.usersPage.currentPage} & count =${this.props.usersPage.pageSize}`)
-            .then(response => {
-                this.props.setUsers(response.data.items);
-                this.props.setTotalUserCount(response.data.totalCount)
-                this.props.toggleIsFetching(false)
-            });
+        this.props.getUsers(this.props.usersPage.currentPage, this.props.usersPage.pageSize)
     }
 
     onPageChanged = (pageNumber: number) => {
-        this.props.setCurrentPage(pageNumber);
-        this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber} & count =${this.props.usersPage.pageSize}`)
-            .then(response => {
-                this.props.setUsers(response.data.items);
-                this.props.toggleIsFetching(false)
-            });
+        this.props.onPageChangedThunkCreator(pageNumber, this.props.usersPage.pageSize)
     }
 
     render() {
         return <>
-
             {this.props.usersPage.isFetching
                 ?
                 <Preloader/>
@@ -61,6 +45,7 @@ export class UsersAPIComponent extends React.Component<UsersPropsType> {
                 follow={this.props.follow}
                 unfollow={this.props.unfollow}
                 toggleIsFetching={this.props.toggleIsFetching}
+                followingInProgress={this.props.followingInProgress}
             />
         </>
     }
@@ -75,12 +60,12 @@ let mapStateToProps = (state: AppRootStateType) => {
 }
 
 export const UsersContainer = connect(mapStateToProps, {
-    follow: followAC,
-    unfollow: unFollowAC,
-    setUsers: setUsersAC,
-    setCurrentPage: setCurrentPageAC,
-    setTotalUserCount: setTotalUserCountAC,
+    follow: follow,
+    unfollow: unFollow,
     toggleIsFetching: toggleIsFetchingAC,
+    followingInProgress: followingInProgressAC,
+    getUsers: getUsersThunkCreator,
+    onPageChangedThunkCreator: onPageChangedThunkCreator
 })(UsersAPIComponent)
 
 

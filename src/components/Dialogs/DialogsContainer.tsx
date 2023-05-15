@@ -3,16 +3,15 @@ import {sendMessageAC, updateNewMessagesBodyAC} from "../../redux/dialogs-reduce
 import {AppRootStateType} from "../../redux/redux-store";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
-import {Dispatch} from "redux";
 
 
-let mapStateToProps = (state: AppRootStateType) => {
+let mapStateToProps = (state: AppRootStateType)  => {
     return {
         dialogsPage: state.dialogsPage
     }
 }
 
-let mapDispatchToProps = (dispatch:Dispatch) => {
+/*let mapDispatchToProps = (dispatch:Dispatch) => {
     return {
         updateNewMessagesBody: (newMessageBody: string) => {
            dispatch(updateNewMessagesBodyAC(newMessageBody))
@@ -21,5 +20,8 @@ let mapDispatchToProps = (dispatch:Dispatch) => {
             dispatch(sendMessageAC())
         }
     }
-}
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
+}*/
+export const DialogsContainer = connect(mapStateToProps, {
+    sendMessage:sendMessageAC,
+    updateNewMessagesBody:updateNewMessagesBodyAC
+})(Dialogs);

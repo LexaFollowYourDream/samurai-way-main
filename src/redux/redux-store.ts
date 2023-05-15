@@ -1,8 +1,9 @@
-import {combineReducers,legacy_createStore, Store} from "redux";
+import {applyMiddleware, combineReducers, legacy_createStore, Store} from "redux";
 import {profileReducer} from "./profile-reducer";
 import {dialogsReducer} from "./dialogs-reducer";
 import {usersReducer} from "./users-reducer";
-
+import {authReducer} from "./auth-reducer";
+import thunkMiddleware from "redux-thunk"
 
 
 //объединяя reducer-ы с помощью combineReducers,
@@ -11,9 +12,10 @@ const rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     usersPage:usersReducer,
+    auth:authReducer,
 })
 // непосредственно создаём store (и делаем его типизацию)
-export const store:StoreType = legacy_createStore(rootReducer)
+export const store:StoreType = legacy_createStore(rootReducer , applyMiddleware(thunkMiddleware))
 
 export type StoreType = Store<AppRootStateType>
 

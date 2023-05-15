@@ -1,33 +1,9 @@
+// Tипы данных profile-reducer
 export type PostsType = {
     id: number,
     message: string,
     like: number
 }
-
-
-/*
-export type ProfileContacts = {
-    facebook: string
-    website: string|null,
-    vk: string,
-    twitter: string,
-    instagram: string,
-    youtube: null,
-    github: string,
-    mainLink:string| null
-}
-export type ProfileType = {
-    userId: number,
-    aboutMe: string,
-    contacts: ProfileContacts,
-    lookingForAJob: boolean,
-    lookingForAJobDescription: string,
-    fullName: string,
-    photos: { small:  string, large: string }
-}
-*/
-
-
 
 type ContactsType = {
     github: string
@@ -56,10 +32,10 @@ export type ProfileType = {
 export type ProfilePageType = {
     posts: PostsType[]
     messageForNewPost: string
-    profile:  ProfileType |null
+    profile: ProfileType | null
 }
 
-// Tипы данных profile-reducer
+// Tипы данных dialogs-reducer
 
 
 export type MessageType = {
@@ -76,15 +52,15 @@ export type DialogsType = {
 export type DialogsPageType = {
     dialogs: DialogsType[]
     messages: MessageType[]
-    newMessageBody: string
+    newMessageBody: string,
 }
 
-// Tипы данных dialogs-reducer
+// Tипы данных  users-reducer
 
 
 export type UsersLocation = {
     city: string,
-    country: string
+    country: string,
 }
 
 export type UserType = {
@@ -103,9 +79,19 @@ export type UserPageType = {
     pageSize: number,
     totalUsersCount: number,
     currentPage: number,
-    isFetching: boolean
+    isFetching: boolean,
+    followingInProgress:Array<number>
 }
 
 
-// Tипы данных  users-reducer
+// Tипы данных  auth-reducer
+
+export type AuthType = {
+    id: null | number,
+    email: null | string,
+    login: null | string,
+    isAuth:boolean,
+}
+
+
 
